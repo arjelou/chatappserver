@@ -8,22 +8,39 @@ exports.getUserList = async (req, res) => {
     res.send(userList); 
 }
 
-//MESSAGES
+//GET MESSAGES
 exports.getMessages = async (req, res) => {
     const messageList = await messagesList.findAll();
     res.send(messageList);
 }
-
+//ADD MESSAGES
 exports.sentMessage = async (req, res, user) => {
     const addnewMessage = {
         messages: req.body.message,
-        // userId: req.body.userId,
+        userId: req.body.userId
     }
     const postMessage = await messagesList.create(addnewMessage)
     res.send(postMessage);
 }
-
-
+//DELETE MESSAGES
+exports.deleteMessages = async (req, res, user) => {
+    await messagesList.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+}
+//UPDATE MESSAGES
+exports.updateMessages = async (req, res) => {
+    await messagesList.update({ 
+        messages: req.body.usermessage,
+    },     
+        {
+        where: {
+            id: req.params.id
+        }
+    });
+}
 
 // NOT HASHING THE PASSWORD
 exports.signupUser = async (req, res, user) => {
@@ -45,5 +62,4 @@ exports.loginUser = async (req, res) => {
         }
      });
      validateUsers === null ?  res.send(validateUsers) : res.send(validateUsers)
-  
 }

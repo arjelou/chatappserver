@@ -9,9 +9,9 @@ router.get('/users',controller.getUserList)
 
 // MESSAGES 
 router.get('/messages',controller.getMessages)
-router.post('/sentmessage',controller.sentMessage)
-// router.delete('/category/:id',controller.deleteCategory)
-// router.put('/update-category/:id',controller.updateCategory)
+router.post('/messages',controller.sentMessage)
+router.delete('/messages/:id',controller.deleteMessages)
+router.put('/messages/:id',controller.updateMessages)
 
 // SIGNUP ROUTES
 router.post('/signup',controller.signupUser)
